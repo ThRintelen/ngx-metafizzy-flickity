@@ -27,7 +27,8 @@ export class FlickityDirective implements OnInit, OnDestroy, AfterViewChecked {
     prevNextButtons: true,
   };
 
-  @Output() flickityReady = new EventEmitter<any>();
+  @Output() ready = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
 
   flickity: any;
 
@@ -42,13 +43,32 @@ export class FlickityDirective implements OnInit, OnDestroy, AfterViewChecked {
         this.elementRef.nativeElement,
         this.flickityConfig
       );
-      this.flickityReady.emit(this.flickity);
+      this.ready.emit(this.flickity);
 
       this.flickity.on('scroll', () => {
         this.changeDetection.detectChanges();
       });
 
-      // TODO Change und click events rausreichen, Beispiele dann mit ausgeben
+      this.flickity.on('change', (count: number) => {
+        this.change.emit(count);
+      });
+
+      this.flickity.on(
+        'staticClick',
+        (
+          event: PointerEvent,
+          pointer: PointerEvent,
+          cellElement: string,
+          cellIndex: number
+        ) => {
+          this.change.emit({
+            event,
+            pointer,
+            cellElement,
+            cellIndex,
+          });
+        }
+      );
     });
   }
 

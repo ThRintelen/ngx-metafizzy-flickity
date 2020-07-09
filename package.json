@@ -1,6 +1,20 @@
 {
   "name": "ngx-metafizzy-flickity",
   "version": "1.0.0",
+  "keywords": [
+    "angular",
+    "flickity",
+    "metafizzy"
+  ],
+  "license": "MIT",
+  "author": {
+    "email": "thorsten.rintelen@traperto.com",
+    "name": "Thorsten Rintelen"
+  },
+  "bugs": {
+    "url": "https://github.com/ThRintelen/ngx-metafizzy-flickity/issues"
+  },
+  "homepage": "https://github.com/ThRintelen/ngx-metafizzy-flickity",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

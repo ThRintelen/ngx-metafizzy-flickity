@@ -1,7 +1,115 @@
-// TODO Flickity importieren, in angular json css usw.
-// TODO Module importieren
-// TODO directive setzen
-// TODO Events
-// TODO Config, Default config
-// TODO Projekt woanders einbinden und testen, muss das Modul nach außen exportiert werden?
-// TODO Tests schreiben, Test Banner auf der Seite ausgeben?
+# [Metafizzy Flickity](https://flickity.metafizzy.co/) for Angular
+
+## Installation of ngx-metafizzy-flickity
+
+`npm install ngx-metafizzy-flickity --save`
+
+## Installation of flickity
+
+`npm install flickity --save`
+
+Add flickity in angular.json (since Angular 10)
+
+```typescript
+    "build": {
+        ...
+        "options": {
+        ...
+        "styles": [
+            "src/styles.scss",
+            "node_modules/flickity/dist/flickity.css"
+        ],
+        "allowedCommonJsDependencies": ["flickity"]
+        },
+        ...
+    },
+```
+
+## Usage
+
+Import `FlickityModule` into your app's modules:
+
+```typescript
+import { FlickityModule } from './ngx-flickity/ngx-flickity.module';
+
+@NgModule({
+  imports: [
+    FlickityModule
+  ]
+})
+```
+
+```typescript
+@Component({
+  selector: "my-component",
+  template: `
+    <div flickity>
+      <div *ngFor="let child of children">{{ child.title }}</div>
+    </div>
+  `,
+})
+class MyComponent {
+  children = [{ title: "Child 1" }, { title: "Child 2" }, { title: "Child 3" }];
+}
+```
+
+## Configuration
+
+### Options
+
+Read about Flickity options here: https://flickity.metafizzy.co/options.html
+
+#### Examples
+
+Inline object:
+
+```html
+<div
+  flickity
+  [flickityConfig]="{cellAlign: 'left', percentPosition: true, groupCells: true}"
+></div>
+```
+
+#### Default options
+
+```typescript
+@Input() flickityConfig: Flickity.Options = {
+    groupCells: true,
+    cellAlign: 'center',
+    pageDots: true,
+    draggable: true,
+    prevNextButtons: true,
+};
+```
+
+## Events
+
+### ready: `EventEmitter<Flickity>`
+
+Triggered after flickity is ready.
+
+> https://flickity.metafizzy.co/events.html#ready
+
+### change: `EventEmitter<number>`
+
+Triggered after page is changed.
+
+> https://flickity.metafizzy.co/events.html#change
+
+### click: `EventEmitter<{event: PointerEvent, pointer: PointerEvent, cellElement: string, cellIndex: number}>`
+
+Triggered after click an element.
+
+> https://flickity.metafizzy.co/events.html#staticClick
+
+### Examples
+
+```html
+<div flickity (change)="onChange($event)" (click)="onClick($event)"></div>
+```
+
+### Demo
+
+```html
+ng serve
+```
