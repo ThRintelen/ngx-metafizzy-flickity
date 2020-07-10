@@ -1,6 +1,5 @@
 import {
   AfterViewChecked,
-  ChangeDetectorRef,
   Directive,
   ElementRef,
   EventEmitter,
@@ -32,10 +31,7 @@ export class FlickityDirective implements OnInit, OnDestroy, AfterViewChecked {
 
   flickity: any;
 
-  constructor(
-    public readonly elementRef: ElementRef,
-    private readonly changeDetection: ChangeDetectorRef
-  ) {}
+  constructor(public readonly elementRef: ElementRef) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -44,10 +40,6 @@ export class FlickityDirective implements OnInit, OnDestroy, AfterViewChecked {
         this.flickityConfig
       );
       this.ready.emit(this.flickity);
-
-      this.flickity.on('scroll', () => {
-        this.changeDetection.detectChanges();
-      });
 
       this.flickity.on('change', (count: number) => {
         this.change.emit(count);

@@ -1,6 +1,6 @@
 {
   "name": "ngx-metafizzy-flickity",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Angular module for https://flickity.metafizzy.co/",
   "main": "dist/index.js",
   "keywords": [
