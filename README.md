@@ -30,7 +30,7 @@ Add flickity in angular.json (since Angular 10)
 Import `FlickityModule` into your app's modules:
 
 ```typescript
-import { FlickityModule } from './ngx-flickity/ngx-flickity.module';
+import { FlickityModule } from 'ngx-metafizzy-flickity';
 
 @NgModule({
   imports: [
