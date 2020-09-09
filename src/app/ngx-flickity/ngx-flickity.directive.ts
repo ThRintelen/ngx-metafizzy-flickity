@@ -1,5 +1,5 @@
 import {
-  AfterViewChecked,
+  ChangeDetectorRef,
   Directive,
   ElementRef,
   EventEmitter,
@@ -9,6 +9,8 @@ import {
   Output,
 } from '@angular/core';
 import * as Flickity from 'flickity';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, startWith } from 'rxjs/operators';
 
 function getWindow(): Window {
   return window;
@@ -17,7 +19,7 @@ function getWindow(): Window {
 @Directive({
   selector: '[flickity]',
 })
-export class FlickityDirective implements OnInit, OnDestroy, AfterViewChecked {
+export class FlickityDirective implements OnInit, OnDestroy {
   @Input() flickityConfig: Flickity.Options = {
     groupCells: true,
     cellAlign: 'center',
@@ -30,8 +32,12 @@ export class FlickityDirective implements OnInit, OnDestroy, AfterViewChecked {
   @Output() change = new EventEmitter<any>();
 
   flickity: any;
+  resize = Subscription.EMPTY;
 
-  constructor(public readonly elementRef: ElementRef) {}
+  constructor(
+    public readonly elementRef: ElementRef,
+    private readonly changeDetection: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -62,16 +68,17 @@ export class FlickityDirective implements OnInit, OnDestroy, AfterViewChecked {
         }
       );
     });
+
+    this.resize = fromEvent(getWindow(), 'resize')
+      .pipe(startWith(1), debounceTime(500))
+      .subscribe(() => this.changeDetection.markForCheck());
   }
 
   ngOnDestroy() {
     if (this.flickity) {
       this.flickity.destroy();
     }
-  }
 
-  ngAfterViewChecked() {
-    const event = new Event('resize');
-    getWindow().dispatchEvent(event);
+    this.resize.unsubscribe();
   }
 }
