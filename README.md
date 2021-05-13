@@ -1,5 +1,11 @@
 # [Metafizzy Flickity](https://flickity.metafizzy.co/) for Angular
 
+## Changelog
+
+### 2.0.0
+- Update to Angular 12
+
+
 ## Installation of ngx-metafizzy-flickity
 
 `npm install ngx-metafizzy-flickity --save`
