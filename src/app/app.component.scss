@@ -79,9 +79,13 @@ svg.material-icons:not(:last-child) {
 
 .card-container {
   display: block;
-  margin-top: 16px;
+  margin-top: 50px;
   width: 100%;
   outline-style: none;
+
+  img {
+    margin: 10px;
+  }
 }
 
 .card {

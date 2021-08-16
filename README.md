@@ -2,6 +2,9 @@
 
 ## Changelog
 
+### 2.2.10
+- Update to Angular 12.2
+
 ### 2.0.1
 - Update dependencies
 
