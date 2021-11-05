@@ -2,6 +2,9 @@
 
 ## Changelog
 
+### 3.0.0
+- Update to Angular 13.0
+
 ### 2.2.10
 - Update to Angular 12.2
 
