@@ -1,11 +1,12 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Directive,
   ElementRef,
   EventEmitter,
   Input,
+  NgZone,
   OnDestroy,
-  OnInit,
   Output,
 } from '@angular/core';
 import * as Flickity from 'flickity';
@@ -19,7 +20,7 @@ function getWindow(): Window {
 @Directive({
   selector: '[flickity]',
 })
-export class FlickityDirective implements OnInit, OnDestroy {
+export class FlickityDirective implements AfterViewInit, OnDestroy {
   @Input() flickityConfig: Flickity.Options = {
     groupCells: true,
     cellAlign: 'center',
@@ -30,25 +31,28 @@ export class FlickityDirective implements OnInit, OnDestroy {
 
   @Output() ready = new EventEmitter<any>();
   @Output() change = new EventEmitter<any>();
+  @Output() staticClick = new EventEmitter<any>(true);
 
   flickity: any;
   resize = Subscription.EMPTY;
 
   constructor(
     public readonly elementRef: ElementRef,
-    private readonly changeDetection: ChangeDetectorRef
+    private readonly changeDetection: ChangeDetectorRef,
+    private readonly zone: NgZone
   ) {}
 
-  ngOnInit() {
-    setTimeout(() => {
+  ngAfterViewInit() {
+    this.zone.runOutsideAngular(() => {
       this.flickity = new Flickity(
         this.elementRef.nativeElement,
         this.flickityConfig
       );
+
       this.ready.emit(this.flickity);
 
       this.flickity.on('change', (count: number) => {
-        this.change.emit(count);
+        this.zone.run(() => this.change.emit(count));
       });
 
       this.flickity.on(
@@ -56,22 +60,19 @@ export class FlickityDirective implements OnInit, OnDestroy {
         (
           event: PointerEvent,
           pointer: PointerEvent,
-          cellElement: string,
+          cellElement: HTMLElement,
           cellIndex: number
         ) => {
-          this.change.emit({
-            event,
-            pointer,
-            cellElement,
-            cellIndex,
-          });
+          this.zone.run(() =>
+            this.staticClick.emit({ event, cellElement, cellIndex })
+          );
         }
       );
     });
 
-    this.resize = fromEvent(getWindow(), 'resize')
+    this.resize = fromEvent(window, 'resize')
       .pipe(startWith(1), debounceTime(500))
-      .subscribe(() => this.changeDetection.markForCheck());
+      .subscribe(() => this.changeDetection.detectChanges());
   }
 
   ngOnDestroy() {

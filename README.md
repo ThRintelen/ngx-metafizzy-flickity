@@ -2,6 +2,11 @@
 
 ## Changelog
 
+### 4.0.0
+- Update to Angular 14.0
+- Added a staticClick event emmiter (thanks paimfp)
+- Fix triggers change detection unnecessary (thanks paimfp)
+
 ### 3.0.0
 - Update to Angular 13.0
 
