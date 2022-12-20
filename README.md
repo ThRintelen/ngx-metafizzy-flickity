@@ -2,6 +2,9 @@
 
 ## Changelog
 
+### 5.0.0
+- Update to Angular 15.0
+
 ### 4.0.0
 - Update to Angular 14.0
 - Added a staticClick event emmiter (thanks paimfp)
