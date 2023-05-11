@@ -2,6 +2,9 @@
 
 ## Changelog
 
+### 6.0.0
+- Update to Angular 16.0
+
 ### 5.0.0
 - Update to Angular 15.0
 
