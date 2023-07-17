@@ -2,6 +2,9 @@
 
 ## Changelog
 
+### 6.0.1
+- Update all dependencies
+
 ### 6.0.0
 - Update to Angular 16.0
 
