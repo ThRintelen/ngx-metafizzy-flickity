@@ -35,12 +35,11 @@
     "@angular/platform-browser": "~16.2.11",
     "@angular/platform-browser-dynamic": "~16.2.11",
     "flickity": "^3.0.0",
+    "tslib": "^2.6.2",
     "rxjs": "~7.8.1",
     "zone.js": "~0.13.3"
   },
   "devDependencies": {
-    "fix": "^0.0.6",
-    "tslib": "^2.6.2",
     "@angular-devkit/build-angular": "~16.2.8",
     "@angular/cli": "~16.2.8",
     "@angular/compiler-cli": "~16.2.11",
