@@ -8,9 +8,10 @@ import {
   NgZone,
   OnDestroy,
   Output,
+  inject,
 } from '@angular/core';
 import * as Flickity from 'flickity';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
 
 function getWindow(): Window {
@@ -19,6 +20,7 @@ function getWindow(): Window {
 
 @Directive({
   selector: '[flickity]',
+  standalone: true,
 })
 export class FlickityDirective implements AfterViewInit, OnDestroy {
   @Input() flickityConfig: Flickity.Options = {
@@ -36,11 +38,9 @@ export class FlickityDirective implements AfterViewInit, OnDestroy {
   flickity: any;
   resize = Subscription.EMPTY;
 
-  constructor(
-    public readonly elementRef: ElementRef,
-    private readonly changeDetection: ChangeDetectorRef,
-    private readonly zone: NgZone
-  ) {}
+  readonly elementRef = inject(ElementRef);
+  private readonly changeDetection = inject(ChangeDetectorRef);
+  private readonly zone = inject(NgZone);
 
   ngAfterViewInit() {
     this.zone.runOutsideAngular(() => {

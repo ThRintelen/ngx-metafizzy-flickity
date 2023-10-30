@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 6.1.0
+- Update to standalone
+- BREAKING CHANGES: remove module for import
+
 ### 6.0.2
 - Update all dependencies
 
