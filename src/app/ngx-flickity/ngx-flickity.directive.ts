@@ -10,13 +10,9 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import * as Flickity from 'flickity';
+import Flickity from 'flickity';
 import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
-
-function getWindow(): Window {
-  return window;
-}
 
 @Directive({
   selector: '[flickity]',
