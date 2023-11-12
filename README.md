@@ -2,6 +2,9 @@
 
 ## Changelog
 
+### 7.0.0
+- Update to Angular 17.0
+
 ### 6.1.0
 - Update to standalone
 - BREAKING CHANGES: remove module for import
