@@ -2,6 +2,9 @@
 
 ## Changelog
 
+### 8.0.0
+- Update to Angular 18.0
+
 ### 7.0.0
 - Update to Angular 17.0
 
