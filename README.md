@@ -1,8 +1,8 @@
 # [Metafizzy Flickity](https://flickity.metafizzy.co/) for Angular
 
 
-# This package has been deprecated
-## Package no longer supported.
+## This package has been deprecated
+! Package no longer supported !
 
 
 ## Changelog
